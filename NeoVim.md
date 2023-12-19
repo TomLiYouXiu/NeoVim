@@ -1,6 +1,14 @@
+# 短暂的配置完成可以进行代码的开发 后续随着操作系统的跟换或者其他插件的跟新与发现会随时分享与跟新
+
+## 推荐视频
+
+[Neo2023Neo的个人空间-Neo2023Neo个人主页-哔哩哔哩视频 (bilibili.com)](https://space.bilibili.com/3493292341725978)
+
 # NeoVim的配置以及使用
 
 [xiantang/Neovim-from-scratch (github.com)](https://github.com/xiantang/Neovim-from-scratch)
+
+[🛠️ Installation | LazyVim](https://www.lazyvim.org/installation)
 
 ## 启动
 在win下中的命令号可以直接输入nvim启动
@@ -36,6 +44,11 @@ vim.keymap.set("n", "<Leader>]", "<C-i>", opt)
 
 win中
 在"C:\Users{username}\AppData\Local\nvim\init.lua"进行配置
+
+在win中可以通过Installing Chocolatey进行包的管理 
+
+此时的配置文件为init.vim基本配置同上或者.lua也可
+
 ~~~base
 基本同上 有什么不同的我会及时在这里进行说明
 ~~~
@@ -54,6 +67,7 @@ win中
 视图模式 v 此时可以进行多行选择
 链接跳转 gx
 复制到最后一行 :pu
+跳转到定义：gd
 ~~~
 
 # 插件安装与选择
@@ -101,11 +115,70 @@ require("lazy").setup({
 vim.cmd.colorscheme("base16-tender")
 ~~~
 
-## telescope.nvim（）
+## telescope.nvim（文件名搜索和文本内容搜索）
 
- 
+https://github.com/nvim-telescope/telescope.nvim.git
 
-#  LSP
+### 设置冷启动要不然会占用启动时间
+
+~~~lua
+cmd = "Telescope",
+~~~
+
+### keybindings设置
+
+~~~设置
+设置leader键
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+~~~
+
+~~~lua
+keys = {
+			{ "<leader>p", ":Telescope find_files<CR>", desc = "find files" },
+			{ "<leader>P", ":Telescope live_grep<CR>", desc = "grep file" },
+			{ "<leader>rs", ":Telescope resume<CR>", desc = "resume" },
+			{ "<leader>q", ":Telescope oldfiles<CR>", desc = "oldfiles" },
+		},
+~~~
+
+ ~~~lua
+     {
+     cmd = "Telescope",
+     keys = {
+ 			{ "<leader>p", ":Telescope find_files<CR>", desc = "find files" },
+ 			{ "<leader>P", ":Telescope live_grep<CR>", desc = "grep file" },
+ 			{ "<leader>rs", ":Telescope resume<CR>", desc = "resume" },
+ 			{ "<leader>q", ":Telescope oldfiles<CR>", desc = "oldfiles" },
+ 		},
+     'nvim-telescope/telescope.nvim', tag = '0.1.5',
+ -- or                              , branch = '0.1.x',
+       dependencies = { 'nvim-lua/plenary.nvim' }
+     }
+ ~~~
+
+## Mason.nvim
+
+过程异常艰难（最好使用教育专线）
+
+~~~lua
+	{
+		event = "VeryLazy",
+		"williamboman/mason.nvim",
+		build = ":MasonUpdate", -- :MasonUpdate updates registry contents
+	},
+~~~
+
+#  LSP(代码自动补全)
+
+使用Mason安装 插件
+
+~~~
+    ◍ lua-language-server lua_ls
+    ◍ pyright
+~~~
+
+
 
 
 
